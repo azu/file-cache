@@ -8,13 +8,13 @@
     "prepare": "git config --local core.hooksPath .githooks"
   },
   "workspaces": [
-    "apps/*",
     "packages/*"
   ],
   "devDependencies": {
     "@moonrepo/cli": "^0.6.0",
     "@types/jest": "^27.5.1",
     "@types/node": "^17.0.35",
+    "babel-preset-beemo": "^2.0.0",
     "eslint": "^8.16.0",
     "eslint-config-beemo": "^2.1.1",
     "jest": "^28.1.0",
@@ -28,5 +28,9 @@
     "*.{js,jsx,ts,tsx,css}": [
       "prettier --write"
     ]
+  },
+  "packageManager": "npm@8.11.0",
+  "engines": {
+    "node": "18.0.0"
   }
 }

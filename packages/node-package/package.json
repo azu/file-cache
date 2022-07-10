@@ -38,11 +38,13 @@
   },
   "files": [
     "dts/**/*.d.ts",
+    "esm/**/*.{js,map}",
     "lib/**/*.{js,map}",
+    "mjs/**/*.{mjs,map}",
     "src/**/*.{ts,tsx,json}"
   ],
   "types": "./dts/index.d.ts",
-  "main": "./lib/index.js",
+  "main": "./mjs/index.mjs",
   "exports": {
     "./package.json": "./package.json",
     "./*": {
@@ -52,8 +54,23 @@
     },
     ".": {
       "types": "./dts/index.d.ts",
-      "node": "./lib/index.js",
-      "default": "./lib/index.js"
+      "node": {
+        "import": "./mjs/index.mjs"
+      }
+    },
+    "./node": {
+      "types": "./dts/index.d.ts",
+      "node": {
+        "import": "./mjs/node.mjs"
+      }
+    },
+    "./web": {
+      "types": "./dts/index.d.ts",
+      "browser": {
+        "module": "./esm/web.js",
+        "import": "./esm/web.js"
+      },
+      "default": "./lib/web.js"
     }
   }
 }

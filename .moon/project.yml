@@ -36,6 +36,14 @@ tasks:
       - 'dts'
     env:
       NODE_ENV: 'production'
+  validatePackage:
+    command: 'packemon'
+    args:
+      - 'validate'
+    inputs:
+      - '@globs(sources)'
+      - 'package.json'
+      - 'tsconfig.build.json'
 
   # https://moonrepo.dev/docs/guides/examples/prettier
   format:
