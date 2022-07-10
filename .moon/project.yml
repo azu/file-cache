@@ -1,0 +1,105 @@
+$schema: 'https://moonrepo.dev/schemas/global-project.json'
+
+fileGroups:
+  configs:
+    - '*.{js,json,yml,yaml}'
+  sources:
+    - 'src/**/*'
+    - 'types/**/*'
+  tests:
+    - 'tests/**/*.test.*'
+    - 'tests/**/*.stories.*'
+    - '**/__tests__/**/*'
+  assets:
+    - 'assets/**/*'
+    - 'images/**/*'
+    - 'static/**/*'
+    - '**/*.{scss,css}'
+    - '**/*.{md,mdx}'
+
+tasks:
+  # https://moonrepo.dev/docs/guides/examples/packemon
+  buildPackage:
+    command: 'packemon'
+    args:
+      - 'pack'
+      - '--addEngines'
+      - '--addExports'
+      - '--declaration'
+      - '--declarationConfig'
+      - 'tsconfig.build.json'
+    inputs:
+      - '@globs(sources)'
+      - 'package.json'
+      - 'tsconfig.build.json'
+    outputs:
+      - 'dts'
+    env:
+      NODE_ENV: 'production'
+
+  # https://moonrepo.dev/docs/guides/examples/prettier
+  format:
+    command: 'prettier'
+    args:
+      - '--config'
+      - '@in(5)'
+      - '--ignore-path'
+      - '@in(4)'
+      - '--check'
+      - '.'
+    inputs:
+      - '@globs(sources)'
+      - '@globs(tests)'
+      - '@globs(configs)'
+      - '**/*.{md,mdx}'
+      - '/.prettierignore'
+      - '/prettier.config.js'
+
+  # https://moonrepo.dev/docs/guides/examples/eslint
+  lint:
+    command: 'eslint'
+    args:
+      - '--ext'
+      - '.ts,.tsx,.cts,.mts,.js,.jsx,.cjs,.mjs'
+      - '--fix'
+      - '--report-unused-disable-directives'
+      - '--no-error-on-unmatched-pattern'
+      - '--exit-on-fatal-error'
+      - '--ignore-path'
+      - '@in(4)'
+      - '.'
+    inputs:
+      - '@globs(sources)'
+      - '@globs(tests)'
+      - '*.config.*'
+      - '**/.eslintrc.*'
+      - '/.eslintignore'
+      - '/.eslintrc.*'
+      - 'tsconfig.json'
+      - '/tsconfig.eslint.json'
+      - '/tsconfig.options.json'
+
+  # https://moonrepo.dev/docs/guides/examples/jest
+  test:
+    command: 'jest'
+    args:
+      - '--passWithNoTests'
+      - '--preset'
+      - 'jest-preset-beemo'
+    inputs:
+      - '@globs(sources)'
+      - '@globs(tests)'
+      - 'jest.config.*'
+
+  # https://moonrepo.dev/docs/guides/examples/typescript
+  typecheck:
+    command: 'tsc'
+    args:
+      - '--build'
+      - '--verbose'
+    inputs:
+      - '@globs(sources)'
+      - '@globs(tests)'
+      - 'tsconfig.json'
+      - 'tsconfig.*.json'
+      - '/tsconfig.options.json'

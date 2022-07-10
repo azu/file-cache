@@ -1,0 +1,27 @@
+$schema: 'https://moonrepo.dev/schemas/workspace.json'
+
+projects:
+  browser-package: 'packages/browser-package'
+  cjs-package: 'packages/cjs-package'
+  mjs-package: 'packages/mjs-package'
+  node-package: 'packages/node-package'
+
+node:
+  version: '18.0.0'
+  packageManager: 'yarn'
+  addEnginesConstraint: true
+  dedupeOnLockfileChange: true
+  syncProjectWorkspaceDependencies: true
+  syncVersionManagerConfig: 'nvm'
+
+typescript:
+  projectConfigFileName: 'tsconfig.json'
+  rootConfigFileName: 'tsconfig.json'
+  syncProjectReferences: true
+
+vcs:
+  manager: 'git'
+  defaultBranch: 'main'
+
+actionRunner:
+  logRunningCommand: true
