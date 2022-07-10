@@ -13,6 +13,9 @@
     },
     {
       "path": "packages/node-package"
+    },
+    {
+      "path": "packages/npm"
     }
   ]
 }
