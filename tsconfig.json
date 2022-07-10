@@ -3,16 +3,7 @@
   "files": [],
   "references": [
     {
-      "path": "packages/cjs-package"
-    },
-    {
       "path": "packages/core"
-    },
-    {
-      "path": "packages/mjs-package"
-    },
-    {
-      "path": "packages/node-package"
     },
     {
       "path": "packages/npm"
