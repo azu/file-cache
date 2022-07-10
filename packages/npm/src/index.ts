@@ -1,11 +1,10 @@
 import * as fs from "fs";
-import { createRequire } from "node:module";
-const require = createRequire(import.meta.url);
+import resolve from "resolve";
 export const createNpmPackage = (dependencyNames: string[]): string => {
     let result = "";
     for (const dependencyName of dependencyNames) {
         try {
-            const pkg = JSON.parse(fs.readFileSync(require.resolve(`${dependencyName}/package.json`), "utf-8"));
+            const pkg = JSON.parse(fs.readFileSync(resolve.sync(`${dependencyName}/package.json`), "utf-8"));
             result += `__${pkg.version}`;
         } catch (error: any) {
             error.message = `${dependencyNames} is not installed: ` + error.message;

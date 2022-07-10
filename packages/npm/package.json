@@ -40,6 +40,7 @@
   "types": "./dts/index.d.ts",
   "main": "./cjs/index.cjs",
   "dependencies": {
+    "resolve": "^1.22.1"
   },
   "devDependencies": {
     "mocha": "^10.0.0",
