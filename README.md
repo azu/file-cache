@@ -1,21 +1,57 @@
-# moon examples
+# @file-cache
 
-A collection of packages and applications using moon and popular JS tooling.
+Transform Cache for JavaScript.
 
-### Tooling
+## When to update the cache
 
-The following tools are configured as moon tasks.
+- When the source code changes.
+- When the dependencies change.
+- When the configuration changes.
+- When the cache is cleared.
 
-- ESLint
-- Jest
-- Packemon
-- Prettier
-- TypeScript
+## Cache Mechanism
 
-### Frameworks
+- When A cache key is updated, all file cache should be updated
+- Cache file structure
 
-The following frameworks have been integrated into moon.
+```
+|- .<cache-dorectory>
+  |- <hash-of-cache-key>
+```
 
-- [Next.js](./apps/nextjs-app/README.md)
-- [Remix](./apps/remix-app/README.md)
-- [Vue + Vite + Vitest](./apps/vue-vite-app/README.md)
+```markdown
+{
+  "file-path": <result>
+}
+```
+
+## Usage
+
+```js
+import { creatCache, createCacheKey } from "@file-cache/core";
+import { cacheKeyPackageJson, cacheKeyDependency } from "@file-cache/npm"
+
+const config = {
+    /*...*/
+}
+const cache = createCache({
+    mode: "content",
+    cacheDirectory: ".cache/my-tool", // node_modules/.cache/myTool by default 
+    // create key for cache
+    key: createCacheKey([
+        // use dependency(version) as cache key
+        cacheKeyDependencies(["prettier"]),
+        // use custom key
+        () => {
+            return JSON.stringify(config);
+        }
+    ])
+});
+
+const result = await cache.get("file.js");
+if (result) {
+    return result
+}
+const transformed = await transform("file.js");
+await cache.set("file.js", transformed);
+```

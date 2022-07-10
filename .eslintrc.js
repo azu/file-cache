@@ -8,18 +8,10 @@ module.exports = {
         project: "tsconfig.eslint.json",
         tsconfigRootDir: __dirname
     },
-    extends: [
-        "beemo",
-        "beemo/node"
-        // Uncomment when targeting browsers
-        // 'beemo/browser',
-        // Uncomment if using React/JSX
-        // 'beemo/react',
-    ],
+    extends: ["plugin:@typescript-eslint/recommended"],
     rules: {
         // Doesn't understand the new TS 4.7 imports
         "import/no-unresolved": "off",
-
         // We need to keep "index" around in imports for extensions
         "import/no-useless-path-segments": "off"
     },

@@ -7,9 +7,7 @@ fileGroups:
     - 'src/**/*'
     - 'types/**/*'
   tests:
-    - 'tests/**/*.test.*'
-    - 'tests/**/*.stories.*'
-    - '**/__tests__/**/*'
+    - 'tests/**/*.test.ts'
   assets:
     - 'assets/**/*'
     - 'images/**/*'
@@ -89,15 +87,13 @@ tasks:
 
   # https://moonrepo.dev/docs/guides/examples/jest
   test:
-    command: 'jest'
+    command: 'mocha'
     args:
-      - '--passWithNoTests'
-      - '--preset'
-      - 'jest-preset-beemo'
+      - '@globs(tests)'
     inputs:
       - '@globs(sources)'
       - '@globs(tests)'
-      - 'jest.config.*'
+      - '.mocharc.json'
 
   # https://moonrepo.dev/docs/guides/examples/typescript
   typecheck:
