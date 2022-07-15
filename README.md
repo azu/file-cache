@@ -45,8 +45,11 @@ const targetFiles = ["a.js", "b.js", "c.js"];
 const doHeavyTask = (filePath) => {
     // do heavy task
 }
-for (const targetFile in targetFiles) {
+for (const targetFile of targetFiles) {
     const result = await cache.getAndUpdateCache(targetFile);
+    if (result.error) {
+        throw result.error
+    }
     if (!result.changed) {
         continue; // no need to update
     }
