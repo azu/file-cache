@@ -2,7 +2,8 @@
 
 A cache for file metadata or file content.
 
-It is useful for process that work o a given series of files and that only need to repeat the job on the changed ones since the previous run of the process.
+It is useful for process that work o a given series of files and that only need to repeat the job on the changed ones
+since the previous run of the process.
 
 ## When to update the cache
 
@@ -19,11 +20,13 @@ npm install @file-cache/core @file-cache/npm
 
 ## Usage
 
+Do heavy tasks for changed files.
+
 ```js
 import { creatCache, createCacheKey } from "@file-cache/core";
 import { createNpmPackageKey } from "@file-cache/npm"
 
-const prettierConfig = {/* ... */};
+const prettierConfig = {/* ... */ };
 const cache = createCache({
     // Use hash value of the content for detecting changes 
     mode: "content", // or "metadata"
@@ -53,6 +56,10 @@ for (const targetFile in targetFiles) {
 await cache.reconcile();
 ```
 
+**Options:**
+
+See [package/core](packages/core) documentation.
+
 ## Cache Mechanism
 
 Cache file directory:
@@ -80,7 +87,7 @@ When the `<hash-of-cache-key>` is changed, the previous cache file will not be d
 ## Related
 
 - [royriojas/file-entry-cache](https://github.com/royriojas/file-entry-cache)
-  - Inspired by this project
+    - Inspired by this project
 
 ## License
 

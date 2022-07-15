@@ -4,8 +4,22 @@ import { md5 } from "./md5.js";
 import fs from "node:fs/promises";
 
 export type CreateCacheOptions = {
+    /**
+     * - content: Using the hash value of file content
+     *   - Slow but accurate
+     * - metadata: Using the metadata of file
+     *   - Fast but not accurate
+     *   - It can not used in CI env
+     */
     mode: "content" | "metadata";
+    /**
+     * The key of cache file
+     */
     key: string;
+    /**
+     * Custom cache directory.
+     * Default: node_modules/.cache/<pkg-name>
+     */
     cacheDirectory?: string;
 };
 /**

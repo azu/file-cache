@@ -10,7 +10,7 @@ npm install @file-cache/core
 
 ```js
 import { createCache } from '@file-cache/core';
-
+// use metadata starategy to detect changes
 const cache = await createCache({
     key: "test",
     mode: "metadata"
@@ -29,6 +29,30 @@ assert.deepStrictEqual(result2, {
     changed: false,
     error: undefined
 });
+```
+
+### Options
+
+```ts
+export type CreateCacheOptions = {
+    /**
+     * - content: Using the hash value of file content
+     *   - Slow but accurate
+     * - metadata: Using the metadata of file
+     *   - Fast but not accurate
+     *   - It can not used in CI env
+     */
+    mode: "content" | "metadata";
+    /**
+     * The key of cache file
+     */
+    key: string;
+    /**
+     * Custom cache directory.
+     * Default: node_modules/.cache/<pkg-name>
+     */
+    cacheDirectory?: string;
+};
 ```
 
 ## Tests
