@@ -62,6 +62,10 @@ describe("file-entry-cache", function () {
             key: "test",
             mode: "metadata"
         });
+        await deleteCacheFile({
+            key: createCacheKey([() => "test"]),
+            mode: "metadata"
+        });
     });
 
     it("example", async () => {
