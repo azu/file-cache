@@ -7,7 +7,11 @@
     "build": "moon run :build",
     "test": "moon run :test",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
-    "prepare": "git config --local core.hooksPath .githooks"
+    "prepare": "git config --local core.hooksPath .githooks",
+    "versionup:patch": "npm version patch --workdspaces",
+    "versionup:minor": "npm version minor --workdspaces",
+    "versionup:major": "npm version major --workdspaces",
+    "release": "npm run build && npm publish --workspaces"
   },
   "workspaces": [
     "packages/*"

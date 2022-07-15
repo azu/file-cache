@@ -1,6 +1,6 @@
 {
   "name": "@file-cache/npm",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Core library for file-cache",
   "keywords": [
     "node",
