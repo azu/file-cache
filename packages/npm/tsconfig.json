@@ -9,7 +9,8 @@
   ],
   "exclude": [
     "dts",
-    "lib"
+    "cjs",
+    "dts"
   ],
   "references": []
 }
