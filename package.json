@@ -8,9 +8,9 @@
     "test": "moon run :test",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
     "prepare": "git config --local core.hooksPath .githooks",
-    "versionup:patch": "npm version patch --workspaces && npm version patch",
-    "versionup:minor": "npm version minor --workspaces && npm version minor",
-    "versionup:major": "npm version major --workspaces && npm version major",
+    "versionup:patch": "npm version patch --workspaces --include-workspace-root",
+    "versionup:minor": "npm version minor --workspaces --include-workspace-root",
+    "versionup:major": "npm version major --workspaces --include-workspace-root",
     "release": "npm run build && npm publish --workspaces"
   },
   "workspaces": [
