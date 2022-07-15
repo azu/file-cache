@@ -1,28 +1,20 @@
 # @file-cache
 
-Transform Cache for JavaScript.
+A cache for file metadata or file content.
+
+It is useful for process that work o a given series of files and that only need to repeat the job on the changed ones since the previous run of the process.
 
 ## When to update the cache
 
 - When the source code changes.
+- When the source code metadata changes.
 - When the dependencies change.
 - When the configuration changes.
-- When the cache is cleared.
 
-## Cache Mechanism
-
-- When A cache key is updated, all file cache should be updated
-- Cache file structure
+## Installation
 
 ```
-|- .<cache-dorectory>
-  |- <hash-of-cache-key>
-```
-
-```markdown
-{
-  "file-path": <result>
-}
+npm install @file-cache/core @file-cache/npm
 ```
 
 ## Usage
@@ -31,27 +23,65 @@ Transform Cache for JavaScript.
 import { creatCache, createCacheKey } from "@file-cache/core";
 import { cacheKeyPackageJson, cacheKeyDependency } from "@file-cache/npm"
 
-const config = {
-    /*...*/
-}
+const prettierConfig = {/* ... */};
 const cache = createCache({
-    mode: "content",
-    cacheDirectory: ".cache/my-tool", // node_modules/.cache/myTool by default 
+    // Use hash value of the content for detecting changes 
+    mode: "content", // or "metadata"
     // create key for cache
     key: createCacheKey([
         // use dependency(version) as cache key
         cacheKeyDependencies(["prettier"]),
         // use custom key
         () => {
-            return JSON.stringify(config);
+            return JSON.stringify(prettierConfig);
         }
     ])
 });
 
-const result = await cache.get("file.js");
-if (result) {
-    return result
+const targetFiles = ["a.js", "b.js", "c.js"];
+const doHeavyTask = (filePath) => {
+    // do heavy task
 }
-const transformed = await transform("file.js");
-await cache.set("file.js", transformed);
+for (const targetFile in targetFiles) {
+    const result = await cache.getAndUpdateCache(targetFile);
+    if (!result.changed) {
+        continue; // no need to update
+    }
+    doHeavyTask(targetFile);
+}
+// write cache state to file for persistence
+await cache.reconcile();
 ```
+
+## Cache Mechanism
+
+Cache file directory:
+
+:memo: You can change the directory by `cacheDirectory` option.
+
+```
+|- node_modules
+  |- .cache
+    |- <pkg-name>
+      |- <hash-of-cache-key>
+```
+
+Cache file structure:
+
+```markdown
+{
+"file-path": <result>
+}
+```
+
+This library does not clean up previous cache files.
+When the `<hash-of-cache-key>` is changed, the previous cache file will not be deleted automatically.
+
+## Related
+
+- [royriojas/file-entry-cache](https://github.com/royriojas/file-entry-cache)
+  - Inspired by this project
+
+## License
+
+MIT

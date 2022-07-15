@@ -40,6 +40,10 @@ const getPackageName = async (pkgPath: string) => {
     }
 };
 
+/**
+ * Create cache instance
+ * @param options
+ */
 export const createCache = async (options: CreateCacheOptions) => {
     const { packageDirectory } = await import("pkg-dir");
     const pkgDir = await packageDirectory();
@@ -51,10 +55,19 @@ export const createCache = async (options: CreateCacheOptions) => {
     const cacheFile = path.join(cacheDir, options.key);
     const cache = await createFileCache(cacheFile, options.mode);
     return {
+        /**
+         * Experimental method
+         * @param cb
+         */
         async try(cb: () => Promise<void>) {
             await cb();
             await this.reconcile();
         },
+        /**
+         * Get cache status and update the cache value
+         * You need to confirm the status via call `reconcile()` after that
+         * @param filePath
+         */
         async getAndUpdateCache(filePath: string | URL) {
             const descriptor = await cache.getFileDescriptor(filePath);
             return {
@@ -62,9 +75,16 @@ export const createCache = async (options: CreateCacheOptions) => {
                 changed: descriptor.changed
             } as const;
         },
+        /**
+         * Delete cache value for the key
+         * @param filePath
+         */
         async delete(filePath: string) {
             return cache.delete(filePath);
         },
+        /**
+         * Clear cache values
+         */
         async clear() {
             return cache.clear();
         },

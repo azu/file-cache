@@ -34,7 +34,7 @@ const write = (filePath: string, content: string) => {
 const del = (filePath: string) => {
     fs.unlinkSync(filePath);
 };
-const delCacheAndFiles = function () {
+const deleteFixtureFiles = function () {
     fs.rmSync(fixturesDir, {
         force: true,
         recursive: true
@@ -52,12 +52,12 @@ const createFixtureFiles = function () {
 
 describe("file-entry-cache", function () {
     beforeEach(function () {
-        delCacheAndFiles();
+        deleteFixtureFiles();
         createFixtureFiles();
     });
 
     afterEach(async function () {
-        delCacheAndFiles();
+        deleteFixtureFiles();
         await deleteCacheFile({
             key: "test",
             mode: "metadata"
@@ -73,6 +73,12 @@ describe("file-entry-cache", function () {
         const result = await cache.getAndUpdateCache(filePath);
         assert.deepStrictEqual(result, {
             changed: true,
+            error: undefined
+        });
+        await cache.reconcile();
+        const result2 = await cache.getAndUpdateCache(filePath);
+        assert.deepStrictEqual(result2, {
+            changed: false,
             error: undefined
         });
     });
@@ -114,7 +120,7 @@ describe("file-entry-cache", function () {
         });
         await cache.getAndUpdateCache(file);
         await cache.reconcile();
-        delCacheAndFiles();
+        deleteFixtureFiles();
         createFixtureFiles();
         assert.strictEqual((await cache.getAndUpdateCache(file)).changed, true);
     });
@@ -126,9 +132,8 @@ describe("file-entry-cache", function () {
         });
         await cache.getAndUpdateCache(file);
         await cache.reconcile();
-        delCacheAndFiles();
+        deleteFixtureFiles();
         createFixtureFiles();
-        console.log(await cache.getAndUpdateCache(file));
         assert.strictEqual((await cache.getAndUpdateCache(file)).changed, false);
     });
     it("should change after reset cache", async function () {
