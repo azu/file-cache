@@ -8,9 +8,9 @@
     "test": "moon run :test",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
     "prepare": "git config --local core.hooksPath .githooks",
-    "versionup:patch": "npm version patch --workdspaces",
-    "versionup:minor": "npm version minor --workdspaces",
-    "versionup:major": "npm version major --workdspaces",
+    "versionup:patch": "npm version patch --workspaces",
+    "versionup:minor": "npm version minor --workspaces",
+    "versionup:major": "npm version major --workspaces",
     "release": "npm run build && npm publish --workspaces"
   },
   "workspaces": [
@@ -40,6 +40,5 @@
   "packageManager": "npm@8.11.0",
   "engines": {
     "node": "18.0.0"
-  },
-  "version": "0.0.2"
+  }
 }
