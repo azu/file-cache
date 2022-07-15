@@ -56,6 +56,10 @@ for (const targetFile in targetFiles) {
 await cache.reconcile();
 ```
 
+**Examples:**
+
+- https://github.com/azu/file-cache-demo
+
 **Options:**
 
 See [package/core](packages/core) documentation.
