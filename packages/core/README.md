@@ -1,5 +1,7 @@
 # @file-cache/core
 
+A cache for file metadata or file content.
+
 ## Installation
 
 ```

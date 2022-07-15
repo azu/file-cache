@@ -1,10 +1,10 @@
 {
   "name": "@file-cache/core",
   "version": "0.0.1",
-  "description": "Core library for file-cache",
+  "description": "A cache for file metadata or file content.",
   "keywords": [
     "node",
-    "lib"
+    "cache"
   ],
   "type": "module",
   "author": "azu",
