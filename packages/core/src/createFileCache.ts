@@ -20,7 +20,7 @@ const readFileCache = async (cacheFilePath: string) => {
 
 export const createFileCache = async (cacheFilePath: string, mode: "content" | "metadata") => {
     // When mode is changed, create another cache
-    const cacheFileFullPath = cacheFilePath + mode;
+    const cacheFileFullPath = cacheFilePath + "-" + mode;
     // file <-> Map
     let fileCacheMap = await readFileCache(cacheFileFullPath);
     // Processing Map

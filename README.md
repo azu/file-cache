@@ -70,7 +70,7 @@ Cache file directory:
 |- node_modules
   |- .cache
     |- <pkg-name>
-      |- <hash-of-cache-key>
+      |- <hash-of-cache-key>-<mode>
 ```
 
 Cache file structure:
