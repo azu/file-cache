@@ -9,7 +9,7 @@
   "type": "module",
   "author": "azu",
   "license": "MIT",
-  "repository": "https://github.com/moonrepo/examples",
+  "repository": "https://github.com/azu/file-cache",
   "packemon": [
     {
       "inputs": {
