@@ -49,6 +49,9 @@
   "scripts": {
     "test": "mocha \"tests/**/*.test.ts\""
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     "./package.json": "./package.json",
     "./*": {
