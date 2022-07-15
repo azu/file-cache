@@ -21,7 +21,7 @@ npm install @file-cache/core @file-cache/npm
 
 ```js
 import { creatCache, createCacheKey } from "@file-cache/core";
-import { cacheKeyPackageJson, cacheKeyDependency } from "@file-cache/npm"
+import { createNpmPackageKey } from "@file-cache/npm"
 
 const prettierConfig = {/* ... */};
 const cache = createCache({
@@ -30,7 +30,7 @@ const cache = createCache({
     // create key for cache
     key: createCacheKey([
         // use dependency(version) as cache key
-        cacheKeyDependencies(["prettier"]),
+        createNpmPackageKey(["prettier"]),
         // use custom key
         () => {
             return JSON.stringify(prettierConfig);

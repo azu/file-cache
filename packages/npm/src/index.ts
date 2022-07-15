@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import resolve from "resolve";
-export const createNpmPackage = (dependencyNames: string[]): string => {
+export const createNpmPackageKey = (dependencyNames: string[]): string => {
     let result = "";
     for (const dependencyName of dependencyNames) {
         try {
