@@ -23,7 +23,7 @@ npm install @file-cache/core @file-cache/npm
 Do heavy tasks for changed files.
 
 ```js
-import { creatCache, createCacheKey } from "@file-cache/core";
+import { createCache, createCacheKey } from "@file-cache/core";
 import { createNpmPackageKey } from "@file-cache/npm"
 
 const prettierConfig = {/* ... */ };
