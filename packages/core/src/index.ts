@@ -1,24 +1,53 @@
 import path from "node:path";
 import { createFileCache } from "./createFileCache.js";
+import { md5 } from "./md5.js";
+import fs from "node:fs/promises";
 
 export type CreateCacheOptions = {
     mode: "content" | "metadata";
-    name: string;
     key: string;
+    cacheDirectory?: string;
 };
-export const resetCache = async (options: CreateCacheOptions) => {
+/**
+ * Delete cache file
+ * Note: It does not clear in-memory cache in the cache.
+ * @param options
+ */
+export const deleteCacheFile = async (options: CreateCacheOptions) => {
     const { packageDirectory } = await import("pkg-dir");
     const pkgDir = await packageDirectory();
-    const cacheDir = path.join(pkgDir, "node_modules/.cache", options.name);
+    const pkgName = await getPackageName(pkgDir);
+    const cacheDir = options.cacheDirectory
+        ? options.cacheDirectory
+        : path.join(pkgDir, "node_modules/.cache", pkgName);
     const cacheFile = path.join(cacheDir, options.key);
-    const cache = await createFileCache(cacheFile, options.mode);
-    await cache.clear();
+    try {
+        await fs.unlink(cacheFile);
+        return true;
+    } catch {
+        return false;
+    }
+};
+
+const getPackageName = async (pkgPath: string) => {
+    const pkgFile = path.join(pkgPath, "package.json");
+    try {
+        const pkg = await fs.readFile(pkgFile, "utf8");
+        const pkgJson = JSON.parse(pkg);
+        return pkgJson.name;
+    } catch {
+        return "file-cache";
+    }
 };
 
 export const createCache = async (options: CreateCacheOptions) => {
     const { packageDirectory } = await import("pkg-dir");
     const pkgDir = await packageDirectory();
-    const cacheDir = path.join(pkgDir, "node_modules/.cache", options.name);
+    const pkgName = await getPackageName(pkgDir);
+    const cacheDir = options.cacheDirectory
+        ? options.cacheDirectory
+        : path.join(pkgDir, "node_modules/.cache", pkgName);
+    await fs.mkdir(cacheDir, { recursive: true });
     const cacheFile = path.join(cacheDir, options.key);
     const cache = await createFileCache(cacheFile, options.mode);
     return {
@@ -26,7 +55,7 @@ export const createCache = async (options: CreateCacheOptions) => {
             await cb();
             await this.reconcile();
         },
-        async getAndUpdateCache(filePath: string) {
+        async getAndUpdateCache(filePath: string | URL) {
             const descriptor = await cache.getFileDescriptor(filePath);
             return {
                 error: descriptor.error,
@@ -60,5 +89,5 @@ export const createCacheKey = (generators: CreateCacheKeyGenerator[]) => {
         }
         key += `__${generatedKey}`;
     }
-    return key;
+    return md5(key);
 };

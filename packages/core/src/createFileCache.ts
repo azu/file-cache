@@ -19,18 +19,21 @@ const readFileCache = async (cacheFilePath: string) => {
 };
 
 export const createFileCache = async (cacheFilePath: string, mode: "content" | "metadata") => {
-    let cacheMap = await readFileCache(cacheFilePath + mode);
-    const entryMap = new Map<string, CacheValue>(cacheMap);
-    const getAndUpdateCacheContent = async (filePath: string) => {
+    // file <-> Map
+    let fileCacheMap = await readFileCache(cacheFilePath + mode);
+    // Processing Map
+    const entryMap = new Map<string, CacheValue>(fileCacheMap);
+    const getAndUpdateCacheContent = async (filePath: string | URL) => {
         try {
             const hash = md5(await fs.readFile(filePath));
-            const cacheValue = cacheMap.get(filePath) as CacheContent | undefined;
+            const normalizedFilePath = filePath.toString();
+            const cacheValue = fileCacheMap.get(normalizedFilePath) as CacheContent | undefined;
             if (cacheValue && cacheValue.hash === hash) {
                 return {
                     changed: false
                 };
             }
-            entryMap.set(filePath, { hash });
+            entryMap.set(normalizedFilePath, { hash });
             return {
                 changed: true
             };
@@ -41,8 +44,9 @@ export const createFileCache = async (cacheFilePath: string, mode: "content" | "
             };
         }
     };
-    const getAndUpdateCacheMetadata = async (filePath: string) => {
-        const cacheValue = cacheMap.get(filePath) as CacheMetaData | undefined;
+    const getAndUpdateCacheMetadata = async (filePath: string | URL) => {
+        const normalizedFilePath = filePath.toString();
+        const cacheValue = fileCacheMap.get(normalizedFilePath) as CacheMetaData | undefined;
         try {
             const stat = await fs.stat(filePath);
             const metadata = {
@@ -54,7 +58,7 @@ export const createFileCache = async (cacheFilePath: string, mode: "content" | "
                     changed: false
                 };
             }
-            entryMap.set(filePath, metadata);
+            entryMap.set(normalizedFilePath, metadata);
             return {
                 changed: true
             };
@@ -66,7 +70,7 @@ export const createFileCache = async (cacheFilePath: string, mode: "content" | "
         }
     };
     return {
-        async getFileDescriptor(filePath: string) {
+        async getFileDescriptor(filePath: string | URL) {
             if (mode === "content") {
                 return getAndUpdateCacheContent(filePath);
             } else if (mode === "metadata") {
@@ -84,9 +88,10 @@ export const createFileCache = async (cacheFilePath: string, mode: "content" | "
             try {
                 await fs.writeFile(cacheFilePath, JSON.stringify(Object.fromEntries(entryMap)), "utf-8");
                 // reflect the changes in the cacheMap
-                cacheMap = new Map(entryMap);
+                fileCacheMap = new Map(entryMap);
                 return true;
-            } catch {
+            } catch (error) {
+                console.error("reconcile is failed", error);
                 return false;
             }
         }
