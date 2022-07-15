@@ -19,8 +19,10 @@ const readFileCache = async (cacheFilePath: string) => {
 };
 
 export const createFileCache = async (cacheFilePath: string, mode: "content" | "metadata") => {
+    // When mode is changed, create another cache
+    const cacheFileFullPath = cacheFilePath + mode;
     // file <-> Map
-    let fileCacheMap = await readFileCache(cacheFilePath + mode);
+    let fileCacheMap = await readFileCache(cacheFileFullPath);
     // Processing Map
     const entryMap = new Map<string, CacheValue>(fileCacheMap);
     const getAndUpdateCacheContent = async (filePath: string | URL) => {
@@ -86,7 +88,7 @@ export const createFileCache = async (cacheFilePath: string, mode: "content" | "
         },
         async reconcile() {
             try {
-                await fs.writeFile(cacheFilePath, JSON.stringify(Object.fromEntries(entryMap)), "utf-8");
+                await fs.writeFile(cacheFileFullPath, JSON.stringify(Object.fromEntries(entryMap)), "utf-8");
                 // reflect the changes in the cacheMap
                 fileCacheMap = new Map(entryMap);
                 return true;

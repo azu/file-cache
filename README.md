@@ -27,13 +27,13 @@ import { createCache, createCacheKey } from "@file-cache/core";
 import { createNpmPackageKey } from "@file-cache/npm"
 
 const prettierConfig = {/* ... */ };
-const cache = createCache({
+const cache = awaitcreateCache({
     // Use hash value of the content for detecting changes 
     mode: "content", // or "metadata"
     // create key for cache
     key: createCacheKey([
         // use dependency(version) as cache key
-        createNpmPackageKey(["prettier"]),
+        () => createNpmPackageKey(["prettier"]),
         // use custom key
         () => {
             return JSON.stringify(prettierConfig);
