@@ -4,6 +4,7 @@
   "infra": "monorepo",
   "scripts": {
     "moon": "moon --color --log trace",
+    "build": "moon run :build",
     "test": "moon run :test",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
     "prepare": "git config --local core.hooksPath .githooks"

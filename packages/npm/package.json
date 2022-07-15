@@ -49,7 +49,7 @@
     "version-1.0.0": "1.0.0"
   },
   "scripts": {
-    "test": "mocha \"test/**/*.test.ts\""
+    "test": "mocha \"tests/**/*.test.ts\""
   },
   "exports": {
     "./package.json": "./package.json",
