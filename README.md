@@ -91,6 +91,10 @@ Cache file structure:
 This library does not clean up previous cache files.
 When the `<hash-of-cache-key>` is changed, the previous cache file will not be deleted automatically.
 
+## Release flow
+
+   npm run version:* && npm run release
+
 ## Related
 
 - [royriojas/file-entry-cache](https://github.com/royriojas/file-entry-cache)
