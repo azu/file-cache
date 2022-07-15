@@ -10,7 +10,7 @@
     "prepare": "git config --local core.hooksPath .githooks",
     "versionup:patch": "npm version patch --workspaces && npm version patch",
     "versionup:minor": "npm version minor --workspaces && npm version minor",
-    "": "npm version major --workspaces && npm version major",
+    "versionup:major": "npm version major --workspaces && npm version major",
     "release": "npm run build && npm publish --workspaces"
   },
   "workspaces": [
@@ -33,7 +33,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,css}": [
-      "prettier --write",versionup:major
+      "prettier --write"
     ]
   },
   "packageManager": "npm@8.11.0",
