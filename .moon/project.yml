@@ -31,7 +31,6 @@ tasks:
       - 'package.json'
       - 'tsconfig.build.json'
     outputs:
-      - 'mjs'
       - 'cjs'
       - 'dts'
     env:

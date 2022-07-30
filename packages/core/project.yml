@@ -5,7 +5,6 @@ tasks:
     outputs:
       - cjs
       - dts
-      - mjs
 
 workspace:
   inheritedTasks:

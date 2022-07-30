@@ -7,7 +7,7 @@
     "cache",
     "npm"
   ],
-  "type": "module",
+  "type": "commonjs",
   "author": "azu",
   "license": "MIT",
   "repository": "https://github.com/azu/file-cache",
@@ -18,14 +18,6 @@
       },
       "platform": "node",
       "format": "cjs"
-    },
-    {
-      "inputs": {
-        "node": "./src/index.ts"
-      },
-      "platform": "node",
-      "format": "mjs",
-      "support": "experimental"
     }
   ],
   "engines": {
@@ -60,13 +52,14 @@
     "./*": {
       "types": "./dts/*.d.ts",
       "node": {
-        "import": "./mjs/*.mjs"
+        "require": "./cjs/*.cjs"
       }
     },
     ".": {
       "types": "./dts/index.d.ts",
       "node": {
-        "import": "./mjs/index.mjs"
+        "import": "./cjs/index-wrapper.mjs",
+        "require": "./cjs/index.cjs"
       }
     }
   }
