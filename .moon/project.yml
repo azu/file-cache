@@ -17,7 +17,7 @@ fileGroups:
 
 tasks:
   # https://moonrepo.dev/docs/guides/examples/packemon
-  buildPackage:
+  build:
     command: 'packemon'
     args:
       - 'pack'
@@ -44,6 +44,8 @@ tasks:
       - '@globs(sources)'
       - 'package.json'
       - 'tsconfig.build.json'
+    deps:
+      - '~:build'
 
   # https://moonrepo.dev/docs/guides/examples/prettier
   format:
@@ -59,9 +61,10 @@ tasks:
       - '@globs(sources)'
       - '@globs(tests)'
       - '@globs(configs)'
-      - '**/*.{md,mdx}'
       - '/.prettierignore'
       - '/prettier.config.js'
+    options:
+      runInCI: false
 
   # https://moonrepo.dev/docs/guides/examples/eslint
   lint:

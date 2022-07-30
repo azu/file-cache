@@ -1,6 +1,1 @@
 type: library
-
-workspace:
-  inheritedTasks:
-    rename:
-      buildPackage: build
