@@ -78,7 +78,7 @@ export const createCache = async (options: CreateCacheOptions) => {
     if (options.noCache) {
         return createNoCache(); // disable cache. It is noop implemention.
     }
-    const { packageDirectory } = await import("pkg-dir");
+    const { packageDirectory } = await _importDynamic("pkg-dir");
     const pkgDir = await packageDirectory();
     const pkgName = await getPackageName(pkgDir);
     const cacheDir = options.cacheDirectory
