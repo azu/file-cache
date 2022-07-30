@@ -20,7 +20,7 @@ npm install @file-cache/core @file-cache/npm
 
 ## Usage
 
-Do heavy tasks for changed files.
+Do heavy tasks for only changed files.
 
 ```js
 import { createCache } from "@file-cache/core";
