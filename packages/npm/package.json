@@ -21,11 +21,10 @@
     },
     {
       "inputs": {
-        "node": "./src/index.ts"
+        "index": "./src/index.ts"
       },
       "platform": "node",
-      "format": "mjs",
-      "support": "experimental"
+      "format": "mjs"
     }
   ],
   "engines": {
@@ -39,7 +38,7 @@
     "src/**/*.{ts,tsx,json}"
   ],
   "types": "./dts/index.d.ts",
-  "main": "./cjs/index.cjs",
+  "main": "./mjs/index.mjs",
   "dependencies": {
     "resolve": "^1.22.1"
   },
@@ -60,13 +59,15 @@
     "./*": {
       "types": "./dts/*.d.ts",
       "node": {
-        "import": "./mjs/*.mjs"
+        "import": "./mjs/*.mjs",
+        "require": "./cjs/*.cjs"
       }
     },
     ".": {
       "types": "./dts/index.d.ts",
       "node": {
-        "import": "./mjs/index.mjs"
+        "import": "./mjs/index.mjs",
+        "require": "./cjs/index.cjs"
       }
     }
   }

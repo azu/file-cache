@@ -12,6 +12,7 @@ mjs/
 umd/
 *.d.ts
 *.d.cts
+*.d.dts
 *.d.mts
 *.min.js
 *.map
