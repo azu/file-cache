@@ -23,7 +23,7 @@ npm install @file-cache/core @file-cache/npm
 Do heavy tasks for changed files.
 
 ```js
-import { createCache, createCacheKey } from "@file-cache/core";
+import { createCache } from "@file-cache/core";
 import { createNpmPackageKey } from "@file-cache/npm"
 
 const prettierConfig = {/* ... */ };
@@ -31,14 +31,15 @@ const cache = awaitcreateCache({
     // Use hash value of the content for detecting changes 
     mode: "content", // or "metadata"
     // create key for cache
-    key: createCacheKey([
+    keys: [
         // use dependency(version) as cache key
         () => createNpmPackageKey(["prettier"]),
         // use custom key
         () => {
             return JSON.stringify(prettierConfig);
         }
-    ])
+    ],
+    noCache: process.env.NO_CACHE_YOUR_TOOL === "true" // disable cache by the flag
 });
 
 const targetFiles = ["a.js", "b.js", "c.js"];
@@ -93,7 +94,7 @@ When the `<hash-of-cache-key>` is changed, the previous cache file will not be d
 
 ## Release flow
 
-   npm run version:* && npm run release
+    npm run versionup:* && npm run release && git add . && git commit -m "update lock" && git push --tags
 
 ## Related
 

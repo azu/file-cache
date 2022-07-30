@@ -1,40 +1,54 @@
 import path from "node:path";
 import { createFileCache } from "./createFileCache.js";
-import { md5 } from "./md5.js";
 import fs from "node:fs/promises";
+import { createCacheKey, CreateCacheKeyGenerator } from "./createCacheKey.js";
+import { createNoCache } from "./noCache.js";
 
+export type { CreateCacheKeyGenerator } from "./createCacheKey.js";
 export type CreateCacheOptions = {
     /**
      * - content: Using the hash value of file content
      *   - Slow but accurate
      * - metadata: Using the metadata of file
      *   - Fast but not accurate
-     *   - It can not used in CI env
+     *   - It can not be used in CI env
      */
     mode: "content" | "metadata";
     /**
-     * The key of cache file
+     * The key generators for cache file
      */
-    key: string;
+    keys: CreateCacheKeyGenerator[];
     /**
      * Custom cache directory.
      * Default: node_modules/.cache/<pkg-name>
      */
     cacheDirectory?: string;
+
+    /**
+     * If true, the cache will not be used.
+     * Default: false
+     *
+     * - getAndUpdateCache(): return { changed: true }
+     * - delete(): nope. return true.
+     * - clear(): nope. return true.
+     * - reconcile(): nope. return true.
+     */
+    noCache?: boolean;
 };
+export type DeleteCacheOptions = Omit<CreateCacheOptions, "noCache">;
 /**
  * Delete cache file
  * Note: It does not clear in-memory cache in the cache.
  * @param options
  */
-export const deleteCacheFile = async (options: CreateCacheOptions) => {
+export const deleteCacheFile = async (options: DeleteCacheOptions) => {
     const { packageDirectory } = await import("pkg-dir");
     const pkgDir = await packageDirectory();
     const pkgName = await getPackageName(pkgDir);
     const cacheDir = options.cacheDirectory
         ? options.cacheDirectory
         : path.join(pkgDir, "node_modules/.cache", pkgName);
-    const cacheFile = path.join(cacheDir, options.key);
+    const cacheFile = path.join(cacheDir, createCacheKey(options.keys));
     try {
         await fs.unlink(cacheFile);
         return true;
@@ -59,6 +73,9 @@ const getPackageName = async (pkgPath: string) => {
  * @param options
  */
 export const createCache = async (options: CreateCacheOptions) => {
+    if (options.noCache) {
+        return createNoCache(); // disable cache. It is noop implemention.
+    }
     const { packageDirectory } = await import("pkg-dir");
     const pkgDir = await packageDirectory();
     const pkgName = await getPackageName(pkgDir);
@@ -66,7 +83,7 @@ export const createCache = async (options: CreateCacheOptions) => {
         ? options.cacheDirectory
         : path.join(pkgDir, "node_modules/.cache", pkgName);
     await fs.mkdir(cacheDir, { recursive: true });
-    const cacheFile = path.join(cacheDir, options.key);
+    const cacheFile = path.join(cacheDir, createCacheKey(options.keys));
     const cache = await createFileCache(cacheFile, options.mode);
     return {
         /**
@@ -93,35 +110,20 @@ export const createCache = async (options: CreateCacheOptions) => {
          * Delete cache value for the key
          * @param filePath
          */
-        async delete(filePath: string) {
+        async delete(filePath: string): Promise<boolean> {
             return cache.delete(filePath);
         },
         /**
          * Clear cache values
          */
-        async clear() {
-            return cache.clear();
+        async clear(): Promise<void> {
+            cache.clear();
         },
         /**
          * Confirm the changes
          */
-        async reconcile() {
+        async reconcile(): Promise<boolean> {
             return cache.reconcile();
         }
     };
-};
-export type CreateCacheKeyGenerator = () => string;
-export const createCacheKey = (generators: CreateCacheKeyGenerator[]) => {
-    if (generators.length === 0) {
-        throw new Error("generators must be provided");
-    }
-    let key = "";
-    for (const generator of generators) {
-        const generatedKey = generator();
-        if (generatedKey === "") {
-            throw new Error("generator must return a non-empty string");
-        }
-        key += `__${generatedKey}`;
-    }
-    return md5(key);
 };
