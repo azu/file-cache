@@ -1,6 +1,6 @@
 {
   "name": "@file-cache/core",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A cache for file metadata or file content.",
   "keywords": [
     "node",
