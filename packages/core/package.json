@@ -6,7 +6,7 @@
     "node",
     "cache"
   ],
-  "type": "commonjs",
+  "type": "module",
   "author": "azu",
   "license": "MIT",
   "repository": "https://github.com/azu/file-cache",
@@ -17,6 +17,13 @@
       },
       "platform": "node",
       "format": "cjs"
+    },
+    {
+      "inputs": {
+        "index": "./src/index.ts"
+      },
+      "platform": "node",
+      "format": "mjs"
     }
   ],
   "engines": {
@@ -30,7 +37,7 @@
     "src/**/*.{ts,tsx,json}"
   ],
   "types": "./dts/index.d.ts",
-  "main": "./cjs/index.cjs",
+  "main": "./mjs/index.mjs",
   "dependencies": {
     "pkg-dir": "^6.0.1"
   },
@@ -49,13 +56,14 @@
     "./*": {
       "types": "./dts/*.d.ts",
       "node": {
+        "import": "./mjs/*.mjs",
         "require": "./cjs/*.cjs"
       }
     },
     ".": {
       "types": "./dts/index.d.ts",
       "node": {
-        "import": "./cjs/index-wrapper.mjs",
+        "import": "./mjs/index.mjs",
         "require": "./cjs/index.cjs"
       }
     }

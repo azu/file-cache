@@ -33,6 +33,7 @@ tasks:
     outputs:
       - 'cjs'
       - 'dts'
+      - 'mjs'
     env:
       NODE_ENV: 'production'
   validatePackage:

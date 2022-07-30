@@ -1,11 +1,5 @@
 type: library
 
-tasks:
-  build:
-    outputs:
-      - cjs
-      - dts
-
 workspace:
   inheritedTasks:
     rename:
