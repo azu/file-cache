@@ -14,7 +14,10 @@ npm install @file-cache/core
 import { createCache } from '@file-cache/core';
 // use metadata starategy to detect changes
 const cache = await createCache({
-    key: "test",
+    keys: [
+        () => "test",
+        () => "custom"
+    ],
     mode: "metadata"
 });
 const filePath = path.resolve(__dirname, "./fixtures/f1.txt");
@@ -46,9 +49,9 @@ export type CreateCacheOptions = {
      */
     mode: "content" | "metadata";
     /**
-     * The key of cache file
+     * The key generators for cache file
      */
-    key: string;
+    keys: CreateCacheKeyGenerator[];
     /**
      * Custom cache directory.
      * Default: node_modules/.cache/<pkg-name>

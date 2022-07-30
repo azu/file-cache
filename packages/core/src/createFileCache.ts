@@ -81,7 +81,7 @@ export const createFileCache = async (cacheFilePath: string, mode: "content" | "
             throw new Error("Invalid mode" + mode);
         },
         delete(filePath: string) {
-            entryMap.delete(filePath);
+            return entryMap.delete(filePath);
         },
         clear() {
             entryMap.clear();

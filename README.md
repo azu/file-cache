@@ -31,14 +31,14 @@ const cache = awaitcreateCache({
     // Use hash value of the content for detecting changes 
     mode: "content", // or "metadata"
     // create key for cache
-    key: createCacheKey([
+    keys: [
         // use dependency(version) as cache key
         () => createNpmPackageKey(["prettier"]),
         // use custom key
         () => {
             return JSON.stringify(prettierConfig);
         }
-    ])
+    ]
 });
 
 const targetFiles = ["a.js", "b.js", "c.js"];
@@ -93,7 +93,7 @@ When the `<hash-of-cache-key>` is changed, the previous cache file will not be d
 
 ## Release flow
 
-   npm run version:* && npm run release
+npm run versionup:* && npm run release
 
 ## Related
 
