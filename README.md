@@ -92,6 +92,10 @@ Cache file structure:
 This library does not clean up previous cache files.
 When the `<hash-of-cache-key>` is changed, the previous cache file will not be deleted automatically.
 
+## Users
+
+- [azu/create-validator-ts: Create JSON Schema validator from TypeScript.](https://github.com/azu/create-validator-ts)
+
 ## Release flow
 
     npm run versionup:* && npm run release && git add . && git commit -m "update lock" && git push --tags
