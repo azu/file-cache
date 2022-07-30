@@ -12,6 +12,8 @@ since the previous run of the process.
 - When the dependencies change.
 - When the configuration changes.
 
+`@file-cache` package help you to implement `--cache` for your tools.
+
 ## Installation
 
 ```
