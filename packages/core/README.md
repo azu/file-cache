@@ -36,6 +36,35 @@ assert.deepStrictEqual(result2, {
 });
 ```
 
+You can disable cache by `noCache` options.
+
+```js
+import { createCache } from '@file-cache/core';
+// use metadata starategy to detect changes
+const cache = await createCache({
+    keys: [
+        () => "test",
+        () => "custom"
+    ],
+    mode: "metadata",
+    noCache: true,
+});
+const filePath = path.resolve(__dirname, "./fixtures/f1.txt");
+const result = await cache.getAndUpdateCache(filePath);
+assert.deepStrictEqual(result, {
+    changed: true,
+    error: undefined
+});
+await cache.reconcile();
+// always, the result.changed is true
+const result2 = await cache.getAndUpdateCache(filePath);
+assert.deepStrictEqual(result2, {
+    changed: true,
+    error: undefined
+});
+```
+
+
 ### Options
 
 ```ts
