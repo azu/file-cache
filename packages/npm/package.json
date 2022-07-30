@@ -1,6 +1,6 @@
 {
   "name": "@file-cache/npm",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "npm util for @file-cache",
   "keywords": [
     "node",
