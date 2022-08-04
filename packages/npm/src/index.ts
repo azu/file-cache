@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import resolve from "resolve";
+import "textlint";
 export const createNpmPackageKey = (dependencyNames: string[]): string => {
     let result = "";
     for (const dependencyName of dependencyNames) {

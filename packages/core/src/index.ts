@@ -35,8 +35,6 @@ export type CreateCacheOptions = {
      */
     noCache?: boolean;
 };
-// FIXME: https://github.com/milesj/packemon/issues/138
-const _importDynamic = new Function("modulePath", "return import(modulePath)");
 export type DeleteCacheOptions = Omit<CreateCacheOptions, "noCache">;
 /**
  * Delete cache file
@@ -44,7 +42,7 @@ export type DeleteCacheOptions = Omit<CreateCacheOptions, "noCache">;
  * @param options
  */
 export const deleteCacheFile = async (options: DeleteCacheOptions) => {
-    const { packageDirectory } = await _importDynamic("pkg-dir");
+    const { packageDirectory } = await import("pkg-dir");
     const pkgDir = await packageDirectory();
     const pkgName = await getPackageName(pkgDir);
     const cacheDir = options.cacheDirectory
@@ -78,7 +76,7 @@ export const createCache = async (options: CreateCacheOptions) => {
     if (options.noCache) {
         return createNoCache(); // disable cache. It is noop implemention.
     }
-    const { packageDirectory } = await _importDynamic("pkg-dir");
+    const { packageDirectory } = await import("pkg-dir");
     const pkgDir = await packageDirectory();
     const pkgName = await getPackageName(pkgDir);
     const cacheDir = options.cacheDirectory
