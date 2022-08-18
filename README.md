@@ -29,7 +29,7 @@ import { createCache } from "@file-cache/core";
 import { createNpmPackageKey } from "@file-cache/npm"
 
 const prettierConfig = {/* ... */ };
-const cache = awaitcreateCache({
+const cache = await createCache({
     // Use hash value of the content for detecting changes 
     mode: "content", // or "metadata"
     // create key for cache
