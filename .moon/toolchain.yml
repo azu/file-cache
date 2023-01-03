@@ -12,7 +12,3 @@ typescript:
   projectConfigFileName: 'tsconfig.json'
   rootConfigFileName: 'tsconfig.json'
   syncProjectReferences: true
-
-
-actionRunner:
-  logRunningCommand: true

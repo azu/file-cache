@@ -7,3 +7,6 @@ projects:
 vcs:
   manager: 'git'
   defaultBranch: 'main'
+
+runner:
+  logRunningCommand: true
