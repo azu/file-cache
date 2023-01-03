@@ -13,9 +13,6 @@ typescript:
   rootConfigFileName: 'tsconfig.json'
   syncProjectReferences: true
 
-vcs:
-  manager: 'git'
-  defaultBranch: 'main'
 
 actionRunner:
   logRunningCommand: true
