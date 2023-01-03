@@ -3,23 +3,3 @@ $schema: 'https://moonrepo.dev/schemas/workspace.json'
 projects:
   npm: 'packages/npm'
   core: 'packages/core'
-
-node:
-  version: '18.0.0'
-  packageManager: 'npm'
-  addEnginesConstraint: true
-  dedupeOnLockfileChange: true
-  syncProjectWorkspaceDependencies: true
-  syncVersionManagerConfig: 'nvm'
-
-typescript:
-  projectConfigFileName: 'tsconfig.json'
-  rootConfigFileName: 'tsconfig.json'
-  syncProjectReferences: true
-
-vcs:
-  manager: 'git'
-  defaultBranch: 'main'
-
-actionRunner:
-  logRunningCommand: true
