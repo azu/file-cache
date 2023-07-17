@@ -51,6 +51,9 @@ export const createFileCache = async (cacheFilePath: string, mode: "content" | "
         const cacheValue = fileCacheMap.get(normalizedFilePath) as CacheMetaData | undefined;
         try {
             const stat = await fs.stat(filePath);
+            console.log({
+                stat
+            });
             const metadata = {
                 mtime: stat.mtime.getTime(),
                 size: stat.size
