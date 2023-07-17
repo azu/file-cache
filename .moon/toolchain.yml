@@ -6,7 +6,7 @@ node:
   addEnginesConstraint: true
   dedupeOnLockfileChange: false
   syncProjectWorkspaceDependencies: true
-  syncVersionManagerConfig: 'nvm'
+  syncVersionManagerConfig: 'nodenv'
 
 typescript:
   projectConfigFileName: 'tsconfig.json'
