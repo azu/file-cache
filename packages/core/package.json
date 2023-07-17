@@ -30,15 +30,6 @@
     "node": ">=16.12.0",
     "npm": ">=6.14.0"
   },
-  "files": [
-    "cjs/**/*",
-    "cjs/**/*.{cjs,mjs,map}",
-    "dts/**/*.d.ts",
-    "mjs/**/*",
-    "mjs/**/*.{mjs,map}",
-    "src/**/*",
-    "src/**/*.{ts,tsx,json}"
-  ],
   "types": "./mjs/index.d.ts",
   "main": "./mjs/index.mjs",
   "dependencies": {
@@ -46,7 +37,8 @@
   },
   "devDependencies": {
     "mocha": "^10.0.0",
-    "ts-node": "^10.8.2"
+    "ts-node": "^10.8.2",
+    "@types/node": "^20.4.2"
   },
   "scripts": {
     "test": "mocha \"tests/**/*.test.ts\""
@@ -70,5 +62,10 @@
         "require": "./cjs/index.cjs"
       }
     }
-  }
+  },
+  "files": [
+    "cjs/**/*",
+    "mjs/**/*",
+    "src/**/*"
+  ]
 }
