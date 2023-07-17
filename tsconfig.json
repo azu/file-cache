@@ -3,6 +3,12 @@
   "files": [],
   "references": [
     {
+      "path": "examples/example-cjs"
+    },
+    {
+      "path": "examples/example-esm"
+    },
+    {
       "path": "packages/core"
     },
     {

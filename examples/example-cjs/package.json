@@ -1,0 +1,16 @@
+{
+  "name": "file-cache-demo-cjs",
+  "version": "1.0.0",
+  "description": "cjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.cjs"
+  },
+  "keywords": [],
+  "author": "azu",
+  "license": "MIT",
+  "dependencies": {
+    "@file-cache/core": "^1.1.4",
+    "@file-cache/npm": "^1.1.4"
+  }
+}

@@ -9,12 +9,14 @@
     "prepare": "git config --local core.hooksPath .githooks",
     "release": "npm run build && npm publish --workspaces",
     "test": "moon run :test",
+    "test:example": "moon run :test",
     "versionup:major": "npm version major --workspaces --include-workspace-root",
     "versionup:minor": "npm version minor --workspaces --include-workspace-root",
     "versionup:patch": "npm version patch --workspaces --include-workspace-root"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "examples/*"
   ],
   "devDependencies": {
     "@babel/preset-env": "^7.22.9",

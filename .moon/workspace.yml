@@ -3,6 +3,8 @@ $schema: 'https://moonrepo.dev/schemas/workspace.json'
 projects:
   npm: 'packages/npm'
   core: 'packages/core'
+  example-cjs: 'examples/example-cjs'
+  example-esm: 'examples/example-esm'
 
 vcs:
   manager: 'git'

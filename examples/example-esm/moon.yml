@@ -1,0 +1,12 @@
+language: javascript
+type: tool
+tasks:
+  test:
+    command: 'node'
+    args:
+      - index.mjs
+    options:
+      mergeArgs: replace
+toolchain:
+  typescript:
+    disabled: true

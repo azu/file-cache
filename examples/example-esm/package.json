@@ -1,0 +1,16 @@
+{
+  "name": "file-cache-demo-esm",
+  "version": "1.0.0",
+  "description": "mjs",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "node index.mjs"
+  },
+  "keywords": [],
+  "author": "azu",
+  "license": "MIT",
+  "dependencies": {
+    "@file-cache/core": "^1.1.4",
+    "@file-cache/npm": "^1.1.4"
+  }
+}
