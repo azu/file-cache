@@ -127,6 +127,7 @@ describe("file-entry-cache", function () {
         await cache.reconcile();
         console.log("will delete files");
         deleteFixtureFiles();
+        assert.ok(!fs.existsSync(file), "file should not exist");
         createFixtureFiles();
         const rest = await cache.getAndUpdateCache(file);
         console.log("rest", rest);
