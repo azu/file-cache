@@ -99,10 +99,13 @@ tasks:
 
   # https://moonrepo.dev/docs/guides/examples/typescript
   typecheck:
-    command: 'tsc'
-    args:
+    command:
+      - 'tsc'
+      # Use incremental builds with project references
       - '--build'
-      - 'tsconfig.json'
+      # Always use pretty output
+      - '--pretty'
+      # Use verbose logging to see affected projects
       - '--verbose'
     inputs:
       - '@globs(sources)'
