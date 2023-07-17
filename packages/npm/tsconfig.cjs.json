@@ -1,8 +1,10 @@
 {
   "extends": "../../tsconfig.options.json",
   "compilerOptions": {
-    "outDir": "dts",
-    "rootDir": "src"
+    "module": "commonjs",
+    "outDir": "cjs",
+    "rootDir": "src",
+    "verbatimModuleSyntax": false
   },
   "include": [
     "src/**/*"

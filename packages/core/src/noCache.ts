@@ -5,9 +5,11 @@ export const createNoCache = (): CacheInterface => {
         async clear(): Promise<void> {
             return;
         },
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         async delete(_filePath: string): Promise<boolean> {
             return true;
         },
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         async getAndUpdateCache(_filePath: string | URL): Promise<{ error?: Error; changed: boolean }> {
             return { changed: true };
         },

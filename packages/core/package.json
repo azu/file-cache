@@ -27,23 +27,18 @@
     }
   ],
   "engines": {
-    "node": ">=14.15.0",
+    "node": ">=16.12.0",
     "npm": ">=6.14.0"
   },
-  "files": [
-    "cjs/**/*.{cjs,mjs,map}",
-    "dts/**/*.d.ts",
-    "mjs/**/*.{mjs,map}",
-    "src/**/*.{ts,tsx,json}"
-  ],
-  "types": "./dts/index.d.ts",
+  "types": "./mjs/index.d.ts",
   "main": "./mjs/index.mjs",
   "dependencies": {
     "pkg-dir": "^6.0.1"
   },
   "devDependencies": {
     "mocha": "^10.0.0",
-    "ts-node": "^10.8.2"
+    "ts-node": "^10.8.2",
+    "@types/node": "^20.4.2"
   },
   "scripts": {
     "test": "mocha \"tests/**/*.test.ts\""
@@ -54,18 +49,23 @@
   "exports": {
     "./package.json": "./package.json",
     "./*": {
-      "types": "./dts/*.d.ts",
       "node": {
+        "types": "./mjs/*.d.ts",
         "import": "./mjs/*.mjs",
         "require": "./cjs/*.cjs"
       }
     },
     ".": {
-      "types": "./dts/index.d.ts",
       "node": {
+        "types": "./mjs/index.d.ts",
         "import": "./mjs/index.mjs",
         "require": "./cjs/index.cjs"
       }
     }
-  }
+  },
+  "files": [
+    "cjs/**/*",
+    "mjs/**/*",
+    "src/**/*"
+  ]
 }

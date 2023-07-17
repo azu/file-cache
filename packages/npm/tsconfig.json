@@ -1,16 +1,10 @@
 {
-  "extends": "../../tsconfig.projectOptions.json",
+  "extends": "../../tsconfig.options.json",
   "compilerOptions": {
-    "outDir": "../../.moon/dts/packages/npm",
-    "rootDir": "."
+    "noEmit": true
   },
   "include": [
     "**/*"
-  ],
-  "exclude": [
-    "dts",
-    "cjs",
-    "mjs"
   ],
   "references": []
 }

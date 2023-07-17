@@ -126,6 +126,9 @@ describe("file-entry-cache", function () {
         await cache.getAndUpdateCache(file);
         await cache.reconcile();
         deleteFixtureFiles();
+        // wait a bit to make sure the mtime is different
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        assert.ok(!fs.existsSync(file), "file should not exist");
         createFixtureFiles();
         assert.strictEqual((await cache.getAndUpdateCache(file)).changed, true);
     });

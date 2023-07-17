@@ -28,16 +28,10 @@
     }
   ],
   "engines": {
-    "node": ">=14.15.0",
+    "node": ">=16.12.0",
     "npm": ">=6.14.0"
   },
-  "files": [
-    "cjs/**/*.{cjs,mjs,map}",
-    "dts/**/*.d.ts",
-    "mjs/**/*.{mjs,map}",
-    "src/**/*.{ts,tsx,json}"
-  ],
-  "types": "./dts/index.d.ts",
+  "types": "./mjs/index.d.ts",
   "main": "./mjs/index.mjs",
   "dependencies": {
     "resolve": "^1.22.1"
@@ -57,18 +51,23 @@
   "exports": {
     "./package.json": "./package.json",
     "./*": {
-      "types": "./dts/*.d.ts",
       "node": {
+        "types": "./mjs/*.d.ts",
         "import": "./mjs/*.mjs",
         "require": "./cjs/*.cjs"
       }
     },
     ".": {
-      "types": "./dts/index.d.ts",
       "node": {
+        "types": "./mjs/index.d.ts",
         "import": "./mjs/index.mjs",
         "require": "./cjs/index.cjs"
       }
     }
-  }
+  },
+  "files": [
+    "cjs/**/*",
+    "mjs/**/*",
+    "src/**/*"
+  ]
 }

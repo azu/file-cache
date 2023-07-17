@@ -24,15 +24,12 @@ tasks:
       - '--addEngines'
       - '--addExports'
       - '--declaration'
-      - '--declarationConfig'
-      - 'tsconfig.build.json'
     inputs:
       - '@globs(sources)'
       - 'package.json'
-      - 'tsconfig.build.json'
+      - 'tsconfig.*.json'
     outputs:
       - 'cjs'
-      - 'dts'
       - 'mjs'
     env:
       NODE_ENV: 'production'
@@ -102,10 +99,13 @@ tasks:
 
   # https://moonrepo.dev/docs/guides/examples/typescript
   typecheck:
-    command: 'tsc'
-    args:
+    command:
+      - 'tsc'
+      # Use incremental builds with project references
       - '--build'
-      - 'tsconfig.build.json'
+      # Always use pretty output
+      - '--pretty'
+      # Use verbose logging to see affected projects
       - '--verbose'
     inputs:
       - '@globs(sources)'
