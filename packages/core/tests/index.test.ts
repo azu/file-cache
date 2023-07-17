@@ -125,9 +125,12 @@ describe("file-entry-cache", function () {
         });
         await cache.getAndUpdateCache(file);
         await cache.reconcile();
+        console.log("will delete files");
         deleteFixtureFiles();
         createFixtureFiles();
-        assert.strictEqual((await cache.getAndUpdateCache(file)).changed, true);
+        const rest = await cache.getAndUpdateCache(file);
+        console.log("rest", rest);
+        assert.strictEqual(rest.changed, true);
     });
     it("should consider file unchanged  even with different mtime when mode:content", async function () {
         const file = path.resolve(__dirname, "./fixtures/f4.txt");
