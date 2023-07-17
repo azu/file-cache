@@ -125,13 +125,12 @@ describe("file-entry-cache", function () {
         });
         await cache.getAndUpdateCache(file);
         await cache.reconcile();
-        console.log("will delete files");
         deleteFixtureFiles();
+        // wait a bit to make sure the mtime is different
+        await new Promise((resolve) => setTimeout(resolve, 100));
         assert.ok(!fs.existsSync(file), "file should not exist");
         createFixtureFiles();
-        const rest = await cache.getAndUpdateCache(file);
-        console.log("rest", rest);
-        assert.strictEqual(rest.changed, true);
+        assert.strictEqual((await cache.getAndUpdateCache(file)).changed, true);
     });
     it("should consider file unchanged  even with different mtime when mode:content", async function () {
         const file = path.resolve(__dirname, "./fixtures/f4.txt");
