@@ -43,7 +43,8 @@
     "version-1.0.0": "1.0.0"
   },
   "scripts": {
-    "test": "mocha \"tests/**/*.test.ts\""
+    "test": "mocha \"tests/**/*.test.ts\"",
+    "updateSnapshot": "UPDATE_SNAPSHOT=1 mocha \"tests/**/*.test.ts\""
   },
   "publishConfig": {
     "access": "public"

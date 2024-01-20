@@ -17,5 +17,5 @@ export const createPackageLockCacheKey = (rootDir: string = process.cwd()) => {
     const hash = crypto.createHash("sha1");
     hash.update(lockFileContents);
     const sha1 = hash.digest("hex");
-    return `${lockFileName}-${sha1}`;
+    return `${lockFileName}__${sha1}`;
 };
