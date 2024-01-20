@@ -1,7 +1,6 @@
 import path from "node:path";
-import * as fs from "fs";
-
-import crypto from "crypto";
+import fs from "node:fs";
+import crypto from "node:crypto";
 
 const LOCK_FILE_NAMES_ORDERED_BY_SEARCH = ["package-lock.json", "yarn.lock", "pnpm-lock.yaml", "bun.lockb"];
 
