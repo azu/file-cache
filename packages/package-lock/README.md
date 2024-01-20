@@ -17,8 +17,17 @@ Create cache key that is based on lock file like `package-lock.json`.
 
 ```js
 import { createPackageLockCacheKey } from '@file-cache/npm';
-createPackageLockCacheKey(); // "package-lock.json__<hash>" 
+const hash = createPackageLockCacheKey(); // "package-lock.json__<hash>" 
 ```
+
+## API
+
+### createPackageLockCacheKey(packageDir): string
+
+Create cache key that is based on lock file like `package-lock.json`.
+Search lock file from `rootDir`.
+
+- Default `packageDir` is `process.cwd()`.
 
 ## Tests
 
