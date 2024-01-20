@@ -73,7 +73,8 @@ See [package/core](packages/core) documentation.
 
 ## Advanced Usage
 
-If your tool has a plugin system, you can use `@file-cache/package-lock` for caching plugin's dependencies.
+If your tool has a plugin system, you can use [`@file-cache/package-lock`](./packages/package-lock) for caching plugin's dependencies.
+This package use `package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`, or `bun.lockb` as cache key.
 
 ```
 npm install @file-cache/core @file-cache/npm @file-cache/package-lock
