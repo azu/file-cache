@@ -16,13 +16,13 @@ Create cache key that is based on lock file like `package-lock.json`.
 ## Usage
 
 ```js
-import { createPackageLockCacheKey } from '@file-cache/npm';
-const hash = createPackageLockCacheKey(); // "package-lock.json__<hash>" 
+import { createPackageLockKey } from '@file-cache/npm';
+const hash = createPackageLockKey(); // "package-lock.json__<hash>" 
 ```
 
 ## API
 
-### createPackageLockCacheKey(packageDir): string
+### createPackageLockKey(packageDir): string
 
 Create cache key that is based on lock file like `package-lock.json`.
 Search lock file from `rootDir`.

@@ -1,5 +1,5 @@
 import * as assert from "node:assert";
-import { createPackageLockCacheKey } from "../src/index.js";
+import { createPackageLockKey } from "../src/index.js";
 import path from "node:path";
 import * as fs from "fs";
 
@@ -10,7 +10,7 @@ describe("Snapshot testing", () => {
         const normalizedTestName = caseName.replace(/-/g, " ");
         it(`Test ${normalizedTestName}`, async function () {
             const fixtureDir = path.join(fixturesDir, caseName);
-            const actual = createPackageLockCacheKey(fixtureDir);
+            const actual = createPackageLockKey(fixtureDir);
             const expectedFilePath = path.join(fixtureDir, "output.txt");
             // Usage: update snapshots
             // UPDATE_SNAPSHOT=1 npm test
