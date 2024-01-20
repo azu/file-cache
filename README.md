@@ -83,38 +83,23 @@ import { createCache } from "@file-cache/core";
 import { createNpmPackageKey } from "@file-cache/npm"
 import { createPackageLockKey } from "@file-cache/package-lock"
 
-const prettierConfig = {/* ... */ };
+const yourConfig = {/* ... */ };
 const cache = await createCache({
     // Use hash value of the content for detecting changes 
     mode: "content", // or "metadata"
     // create key for cache
     keys: [
-        // use dependency(version) as cache key
-        () => createNpmPackageKey(["prettier"]),
+        // use your tool version as cache key
+        () => createNpmPackageKey(["your-tool"]),
+        // use dependency as cache key
+        () => createPackageLockKey(process.cwd()), // search process.cwd()/package-lock.json
         // use custom key
         () => {
-            return JSON.stringify(prettierConfig);
+            return JSON.stringify(yourConfig);
         }
     ],
     noCache: process.env.NO_CACHE_YOUR_TOOL === "true" // disable cache by the flag
 });
-
-const targetFiles = ["a.js", "b.js", "c.js"];
-const doHeavyTask = (filePath) => {
-    // do heavy task
-}
-for (const targetFile of targetFiles) {
-    const result = await cache.getAndUpdateCache(targetFile);
-    if (result.error) {
-        throw result.error
-    }
-    if (!result.changed) {
-        continue; // no need to update
-    }
-    doHeavyTask(targetFile);
-}
-// write cache state to file for persistence
-await cache.reconcile();
 ```
 
 ## Cache Mechanism
