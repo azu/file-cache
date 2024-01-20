@@ -30,6 +30,7 @@ import { createNpmPackageKey } from "@file-cache/npm"
 
 const prettierConfig = {/* ... */ };
 const cache = await createCache({
+    name: "prettier",
     // Use hash value of the content for detecting changes 
     mode: "content", // or "metadata"
     // create key for cache
@@ -85,6 +86,7 @@ import { createPackageLockKey } from "@file-cache/package-lock"
 
 const yourConfig = {/* ... */ };
 const cache = await createCache({
+    name: "your-tool",
     // Use hash value of the content for detecting changes 
     mode: "content", // or "metadata"
     // create key for cache
@@ -114,6 +116,8 @@ Cache file directory:
     |- <pkg-name>
       |- <hash-of-cache-key>-<mode>
 ```
+
+- Related: [sindresorhus/find-cache-dir: Finds the common standard cache directory](https://github.com/sindresorhus/find-cache-dir)
 
 Cache file structure:
 

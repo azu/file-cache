@@ -7,6 +7,12 @@ import { createNoCache } from "./noCache.js";
 export type { CreateCacheKeyGenerator } from "./createCacheKey.js";
 export type CreateCacheOptions = {
     /**
+     * The name of the cache
+     * It is used for the cache directory name
+     *
+     */
+    name: string;
+    /**
      * - content: Using the hash value of file content
      *   - Slow but accurate
      * - metadata: Using the metadata of file
@@ -20,7 +26,7 @@ export type CreateCacheOptions = {
     keys: CreateCacheKeyGenerator[];
     /**
      * Custom cache directory.
-     * Default: node_modules/.cache/<pkg-name>
+     * Default: node_modules/.cache/<name>
      */
     cacheDirectory?: string;
 
@@ -42,12 +48,15 @@ export type DeleteCacheOptions = Omit<CreateCacheOptions, "noCache">;
  * @param options
  */
 export const deleteCacheFile = async (options: DeleteCacheOptions) => {
-    const { packageDirectory } = await import("pkg-dir");
-    const pkgDir = await packageDirectory();
-    const pkgName = await getPackageName(pkgDir);
+    const findCacheDir = await import("find-cache-dir").then((m) => m.default);
     const cacheDir = options.cacheDirectory
         ? options.cacheDirectory
-        : path.join(pkgDir, "node_modules/.cache", pkgName);
+        : // node_modules/.cache/<name>
+          // https://github.com/sindresorhus/find-cache-dir
+          findCacheDir({ name: options.name, create: true });
+    if (!cacheDir) {
+        throw new Error(`Not found cache directory. Please set cacheDirectory option or findCacheDir is failed.`);
+    }
     const cacheFile = path.join(cacheDir, createCacheKey(options.keys));
     try {
         await fs.unlink(cacheFile);
@@ -76,12 +85,15 @@ export const createCache = async (options: CreateCacheOptions) => {
     if (options.noCache) {
         return createNoCache(); // disable cache. It is noop implemention.
     }
-    const { packageDirectory } = await import("pkg-dir");
-    const pkgDir = await packageDirectory();
-    const pkgName = await getPackageName(pkgDir);
+    const findCacheDir = await import("find-cache-dir").then((m) => m.default);
     const cacheDir = options.cacheDirectory
         ? options.cacheDirectory
-        : path.join(pkgDir, "node_modules/.cache", pkgName);
+        : // node_modules/.cache/<name>
+          // https://github.com/sindresorhus/find-cache-dir
+          findCacheDir({ name: options.name });
+    if (!cacheDir) {
+        throw new Error(`Not found cache directory. Please set cacheDirectory option or findCacheDir is failed.`);
+    }
     await fs.mkdir(cacheDir, { recursive: true });
     const cacheFile = path.join(cacheDir, createCacheKey(options.keys));
     const cache = await createFileCache(cacheFile, options.mode);

@@ -60,10 +60,12 @@ describe("file-entry-cache", function () {
     afterEach(async function () {
         deleteFixtureFiles();
         await deleteCacheFile({
+            name: "test",
             keys: [() => "test"],
             mode: "metadata"
         });
         await deleteCacheFile({
+            name: "test",
             keys: [() => "test"],
             mode: "metadata"
         });
@@ -71,6 +73,7 @@ describe("file-entry-cache", function () {
 
     it("example", async () => {
         const cache = await createCache({
+            name: "test",
             keys: [() => "test"],
             mode: "metadata"
         });
@@ -90,6 +93,7 @@ describe("file-entry-cache", function () {
 
     it("should determine if a file has changed since last time reconcile was called", async function () {
         const cache = await createCache({
+            name: "test",
             keys: [() => "test"],
             mode: "metadata"
         });
@@ -120,6 +124,7 @@ describe("file-entry-cache", function () {
     it("should consider file unchanged even with different mtime when mode:metadata", async function () {
         const file = path.resolve(__dirname, "./fixtures/f4.txt");
         const cache = await createCache({
+            name: "test",
             keys: [() => "test"],
             mode: "metadata"
         });
@@ -135,6 +140,7 @@ describe("file-entry-cache", function () {
     it("should consider file unchanged  even with different mtime when mode:content", async function () {
         const file = path.resolve(__dirname, "./fixtures/f4.txt");
         const cache = await createCache({
+            name: "test",
             keys: [() => "test"],
             mode: "content"
         });
@@ -146,6 +152,7 @@ describe("file-entry-cache", function () {
     });
     it("should change after reset cache", async function () {
         const cache = await createCache({
+            name: "test",
             keys: [() => "test"],
             mode: "metadata"
         });
@@ -158,6 +165,7 @@ describe("file-entry-cache", function () {
     it("should not consider file unchanged when noCache: true", async function () {
         const file = path.resolve(__dirname, "./fixtures/f4.txt");
         const cache = await createCache({
+            name: "test",
             keys: [() => "test"],
             mode: "content",
             noCache: true
@@ -171,6 +179,7 @@ describe("file-entry-cache", function () {
     });
     it("should not fail if calling reconcile without changes", async function () {
         const cache = await createCache({
+            name: "test",
             keys: [() => "test"],
             mode: "metadata"
         });
@@ -181,6 +190,7 @@ describe("file-entry-cache", function () {
     it("should tell when file known to the cache is not found anymore ", async function () {
         const file = path.resolve(__dirname, "./fixtures/", fixtureFiles[0].name);
         const cache = await createCache({
+            name: "test",
             keys: [() => "test"],
             mode: "metadata"
         });
@@ -192,6 +202,7 @@ describe("file-entry-cache", function () {
     it("should create cache dir to options.cacheDirectory", async () => {
         const cacheDirectory = path.resolve(__dirname, "./fixtures/cache__");
         await createCache({
+            name: "test",
             cacheDirectory: cacheDirectory,
             keys: [() => "test"],
             mode: "metadata"

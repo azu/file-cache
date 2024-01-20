@@ -14,6 +14,7 @@ npm install @file-cache/core
 import { createCache } from '@file-cache/core';
 // use metadata starategy to detect changes
 const cache = await createCache({
+    name: "your-tool-name",
     keys: [
         () => "test",
         () => "custom"
@@ -42,6 +43,7 @@ You can disable cache by `noCache` options.
 import { createCache } from '@file-cache/core';
 // use metadata starategy to detect changes
 const cache = await createCache({
+    name: "your-tool-name",
     keys: [
         () => "test",
         () => "custom"
@@ -70,11 +72,15 @@ assert.deepStrictEqual(result2, {
 ```ts
 export type CreateCacheOptions = {
     /**
+     * The name of your tool
+     */
+    name: string;
+    /**
      * - content: Using the hash value of file content
      *   - Slow but accurate
      * - metadata: Using the metadata of file
      *   - Fast but not accurate
-     *   - It can not used in CI env
+     *   - It can not be used in CI env
      */
     mode: "content" | "metadata";
     /**
