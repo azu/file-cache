@@ -93,7 +93,7 @@ const cache = await createCache({
         () => createNpmPackageKey(["your-tool"]),
         // use dependency as cache key
         () => createPackageLockKey(process.cwd()), // search process.cwd()/package-lock.json
-        // use custom key
+        // use config as cache key
         () => {
             return JSON.stringify(yourConfig);
         }
