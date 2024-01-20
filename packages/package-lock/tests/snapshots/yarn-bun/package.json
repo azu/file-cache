@@ -1,0 +1,10 @@
+{
+  "name": "yarn",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "azu",
+  "license": "MIT",
+  "dependencies": {
+    "version-1.0.0": "^1.0.0"
+  }
+}

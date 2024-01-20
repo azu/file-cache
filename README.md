@@ -70,6 +70,38 @@ await cache.reconcile();
 
 See [package/core](packages/core) documentation.
 
+## Advanced Usage
+
+If your tool has a plugin system, you can use `@file-cache/package-lock` for caching plugin's dependencies.
+
+```
+npm install @file-cache/core @file-cache/npm @file-cache/package-lock
+```
+
+```js
+import { createCache } from "@file-cache/core";
+import { createNpmPackageKey } from "@file-cache/npm"
+import { createPackageLockKey } from "@file-cache/package-lock"
+
+const yourConfig = {/* ... */ };
+const cache = await createCache({
+    // Use hash value of the content for detecting changes 
+    mode: "content", // or "metadata"
+    // create key for cache
+    keys: [
+        // use your tool version as cache key
+        () => createNpmPackageKey(["your-tool"]),
+        // use dependency as cache key
+        () => createPackageLockKey(process.cwd()), // search process.cwd()/package-lock.json
+        // use config as cache key
+        () => {
+            return JSON.stringify(yourConfig);
+        }
+    ],
+    noCache: process.env.NO_CACHE_YOUR_TOOL === "true" // disable cache by the flag
+});
+```
+
 ## Cache Mechanism
 
 Cache file directory:
@@ -87,7 +119,7 @@ Cache file structure:
 
 ```markdown
 {
-"file-path": <result>
+    "file-path": <result>
 }
 ```
 

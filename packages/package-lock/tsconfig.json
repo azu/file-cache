@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.options.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": [
+    "**/*"
+  ],
+  "references": []
+}

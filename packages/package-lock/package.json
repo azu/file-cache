@@ -1,0 +1,74 @@
+{
+  "name": "@file-cache/package-lock",
+  "version": "1.1.4",
+  "description": "package lock file for @file-cache",
+  "keywords": [
+    "node",
+    "cache",
+    "npm"
+  ],
+  "type": "module",
+  "author": "azu",
+  "license": "MIT",
+  "repository": "https://github.com/azu/file-cache",
+  "packemon": [
+    {
+      "inputs": {
+        "index": "./src/index.ts"
+      },
+      "platform": "node",
+      "format": "cjs"
+    },
+    {
+      "inputs": {
+        "index": "./src/index.ts"
+      },
+      "platform": "node",
+      "format": "mjs"
+    }
+  ],
+  "engines": {
+    "node": ">=16.12.0",
+    "npm": ">=6.14.0"
+  },
+  "types": "./mjs/index.d.ts",
+  "main": "./mjs/index.mjs",
+  "dependencies": {
+    "resolve": "^1.22.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.3",
+    "mocha": "^10.0.0",
+    "ts-node": "^10.8.2",
+    "version-1.0.0": "1.0.0"
+  },
+  "scripts": {
+    "test": "mocha \"tests/**/*.test.ts\"",
+    "updateSnapshot": "UPDATE_SNAPSHOT=1 mocha \"tests/**/*.test.ts\""
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    "./*": {
+      "node": {
+        "types": "./mjs/*.d.ts",
+        "import": "./mjs/*.mjs",
+        "require": "./cjs/*.cjs"
+      }
+    },
+    ".": {
+      "node": {
+        "types": "./mjs/index.d.ts",
+        "import": "./mjs/index.mjs",
+        "require": "./cjs/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "cjs/**/*",
+    "mjs/**/*",
+    "src/**/*"
+  ]
+}
