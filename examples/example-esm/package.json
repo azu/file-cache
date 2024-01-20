@@ -1,6 +1,6 @@
 {
   "name": "file-cache-demo-esm",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "mjs",
   "main": "index.mjs",
   "scripts": {
