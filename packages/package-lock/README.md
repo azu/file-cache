@@ -17,7 +17,7 @@ Create cache key that is based on lock file like `package-lock.json`.
 
 ```js
 import { createPackageLockCacheKey } from '@file-cache/npm';
-createPackageLockCacheKey(); // "package-lock.json-<hash>" 
+createPackageLockCacheKey(); // "package-lock.json__<hash>" 
 ```
 
 ## Tests
