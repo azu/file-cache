@@ -33,7 +33,7 @@
   "types": "./mjs/index.d.ts",
   "main": "./mjs/index.mjs",
   "dependencies": {
-    "pkg-dir": "^6.0.1"
+    "find-cache-dir": "^5.0.0"
   },
   "devDependencies": {
     "mocha": "^10.0.0",
