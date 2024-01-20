@@ -11,7 +11,7 @@
     "lib": [
       "esnext"
     ],
-    "module": "esnext",
+    "module": "NodeNext",
     "noEmitOnError": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
@@ -21,7 +21,7 @@
     "skipLibCheck": true,
     "sourceMap": false,
     "strict": true,
-    "moduleResolution": "nodenext",
+    "moduleResolution": "NodeNext",
     "target": "es2022"
   }
 }

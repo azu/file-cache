@@ -1,0 +1,5 @@
+extends: 'https://raw.githubusercontent.com/moonrepo/moon-configs/master/javascript/packemon/tasks.yml'
+fileGroups:
+  sources:
+    - 'src/**/*'
+    - 'types/**/*'

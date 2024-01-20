@@ -1,5 +1,4 @@
 $schema: 'https://moonrepo.dev/schemas/global-project.json'
-
 fileGroups:
   configs:
     - '*.{js,json,yml,yaml}'
@@ -16,34 +15,6 @@ fileGroups:
     - '**/*.{md,mdx}'
 
 tasks:
-  # https://moonrepo.dev/docs/guides/examples/packemon
-  build:
-    command: 'packemon'
-    args:
-      - 'pack'
-      - '--addEngines'
-      - '--addExports'
-      - '--declaration'
-    inputs:
-      - '@globs(sources)'
-      - 'package.json'
-      - 'tsconfig.*.json'
-    outputs:
-      - 'cjs'
-      - 'mjs'
-    env:
-      NODE_ENV: 'production'
-  validatePackage:
-    command: 'packemon'
-    args:
-      - 'validate'
-    inputs:
-      - '@globs(sources)'
-      - 'package.json'
-      - 'tsconfig.build.json'
-    deps:
-      - '~:build'
-
   # https://moonrepo.dev/docs/guides/examples/prettier
   format:
     command: 'prettier'

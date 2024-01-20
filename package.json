@@ -19,19 +19,19 @@
     "examples/*"
   ],
   "devDependencies": {
-    "@babel/preset-env": "^7.22.9",
-    "@babel/preset-typescript": "^7.22.5",
-    "@moonrepo/cli": "^1.10.1",
-    "@types/mocha": "^10.0.1",
-    "@types/node": "^20.4.2",
-    "eslint": "^8.45.0",
+    "@babel/preset-env": "^7.23.8",
+    "@babel/preset-typescript": "^7.23.3",
+    "@moonrepo/cli": "^1.19.3",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.11.5",
+    "eslint": "^8.56.0",
     "eslint-config-beemo": "^2.1.2",
-    "lint-staged": "^13.2.3",
+    "lint-staged": "^15.2.0",
     "mocha": "^10.2.0",
-    "packemon": "^3.2.0",
-    "prettier": "^3.0.0",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.1.6"
+    "packemon": "^3.2.3",
+    "prettier": "^3.2.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,css}": [
