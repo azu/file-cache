@@ -87,7 +87,7 @@ Cache file structure:
 
 ```markdown
 {
-"file-path": <result>
+    "file-path": <result>
 }
 ```
 
