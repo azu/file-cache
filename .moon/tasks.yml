@@ -34,30 +34,6 @@ tasks:
     options:
       runInCI: false
 
-  # https://moonrepo.dev/docs/guides/examples/eslint
-  lint:
-    command: 'eslint'
-    args:
-      - '--ext'
-      - '.ts,.tsx,.cts,.mts,.js,.jsx,.cjs,.mjs'
-      - '--fix'
-      - '--report-unused-disable-directives'
-      - '--no-error-on-unmatched-pattern'
-      - '--exit-on-fatal-error'
-      - '--ignore-path'
-      - '@in(4)'
-      - '.'
-    inputs:
-      - '@globs(sources)'
-      - '@globs(tests)'
-      - '*.config.*'
-      - '**/.eslintrc.*'
-      - '/.eslintignore'
-      - '/.eslintrc.*'
-      - 'tsconfig.json'
-      - '/tsconfig.eslint.json'
-      - '/tsconfig.options.json'
-
   # https://moonrepo.dev/docs/guides/examples/jest
   test:
     command: 'mocha'
@@ -69,18 +45,3 @@ tasks:
       - '.mocharc.json'
 
   # https://moonrepo.dev/docs/guides/examples/typescript
-  typecheck:
-    command:
-      - 'tsc'
-      # Use incremental builds with project references
-      - '--build'
-      # Always use pretty output
-      - '--pretty'
-      # Use verbose logging to see affected projects
-      - '--verbose'
-    inputs:
-      - '@globs(sources)'
-      - '@globs(tests)'
-      - 'tsconfig.json'
-      - 'tsconfig.*.json'
-      - '/tsconfig.options.json'
