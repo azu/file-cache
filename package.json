@@ -5,7 +5,7 @@
   "scripts": {
     "build": "moon run :build",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
-    "moon": "moon --color --log trace",
+    "moon": "moon",
     "prepare": "git config --local core.hooksPath .githooks",
     "release": "npm run build && npm publish --workspaces",
     "test": "moon run :test",
@@ -21,10 +21,11 @@
   "devDependencies": {
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-typescript": "^7.26.0",
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.17.0",
     "@moonrepo/cli": "^1.30.6",
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.10.3",
-    "eslint": "^9.17.0",
     "lint-staged": "^15.3.0",
     "mocha": "^11.0.1",
     "packemon": "^4.1.1",
@@ -46,6 +47,5 @@
   "engines": {
     "node": "22.12.0"
   },
-  "version": "2.0.0",
-  "packageManager": "npm@10.9.2+sha512.8ab88f10f224a0c614cb717a7f7c30499014f77134120e9c1f0211ea3cf3397592cbe483feb38e0c4b3be1c54e347292c76a1b5edb94a3289d5448484ab8ac81"
+  "version": "2.0.0"
 }

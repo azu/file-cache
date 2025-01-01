@@ -27,7 +27,7 @@
     }
   ],
   "engines": {
-    "node": ">=16.12.0",
+    "node": ">=18.12.0",
     "npm": ">=6.14.0"
   },
   "types": "./mjs/index.d.ts",
@@ -49,18 +49,14 @@
   "exports": {
     "./package.json": "./package.json",
     "./*": {
-      "node": {
-        "types": "./mjs/*.d.ts",
-        "import": "./mjs/*.mjs",
-        "require": "./cjs/*.cjs"
-      }
+      "types": "./mjs/*.d.ts",
+      "import": "./mjs/*.mjs",
+      "default": "./cjs/*.cjs"
     },
     ".": {
-      "node": {
-        "types": "./mjs/index.d.ts",
-        "import": "./mjs/index.mjs",
-        "require": "./cjs/index.cjs"
-      }
+      "types": "./mjs/index.d.ts",
+      "import": "./mjs/index.mjs",
+      "default": "./cjs/index.cjs"
     }
   },
   "files": [

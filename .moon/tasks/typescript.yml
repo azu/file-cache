@@ -1,0 +1,32 @@
+$schema: 'https://moonrepo.dev/schemas/global-project.json'
+fileGroups:
+  configs:
+    - '*.{js,json,yml,yaml}'
+  sources:
+    - 'src/**/*'
+    - 'types/**/*'
+  tests:
+    - 'tests/**/*.test.ts'
+  assets:
+    - 'assets/**/*'
+    - 'images/**/*'
+    - 'static/**/*'
+    - '**/*.{scss,css}'
+    - '**/*.{md,mdx}'
+
+tasks:
+  typecheck:
+    command:
+      - 'tsc'
+      # Use incremental builds with project references
+      - '--build'
+      # Always use pretty output
+      - '--pretty'
+      # Use verbose logging to see affected projects
+      - '--verbose'
+    inputs:
+      - '@globs(sources)'
+      - '@globs(tests)'
+      - 'tsconfig.json'
+      - 'tsconfig.*.json'
+      - '/tsconfig.options.json'
