@@ -1,6 +1,5 @@
 /* eslint-disable sort-keys */
 
-// https://www.npmjs.com/package/eslint-config-beemo
 module.exports = {
     root: true,
     parser: "@typescript-eslint/parser",
